@@ -1,0 +1,71 @@
+version: '3.7'
+services:
+  base-app:
+    build: base-app/.
+    container_name: base-app
+    restart: on-failure
+    volumes:
+      - ../:/var/www:rw
+      - ./base-app/config/php/php.ini-dev:/usr/local/etc/php/conf.d/php.ini:ro
+      - ./base-app/config/php/www.conf:/usr/local/etc/php-fpm.d/www.conf:ro
+    networks:
+      - base-network
+    # command:
+    #   composer install
+
+  base-nginx:
+    image: nginx:1.19.6
+    container_name: base-nginx
+    restart: on-failure
+    volumes_from:
+      - base-app:ro
+    volumes:
+      - ./base-app/config/nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./base-app/config/nginx/vhost.conf:/etc/nginx/conf.d/default.conf
+      - ../mysql/logs/nginx/:/var/log/nginx/
+    ports:
+      - "8084:80"
+      - "8085:8085"
+    environment:
+      - APP_ENV=dev
+      - BODY_SIZE_LIMIT=100
+      - FASTCGI_PASS=base-app:9000
+      - TIMEOUT=10000
+      - DOCKER0NET
+    networks:
+      - base-network
+
+  base-mysql:
+    image: mysql:8.0.23
+    container_name: base-mysql
+    restart: on-failure
+    volumes:
+      - db_data:/var/lib/mysql/
+      - ../mysql/logs/mysql/:/var/log/mysql/
+      - ../mysql/backups/:/var/backups/
+    ports:
+      - "3306:3306"
+    command: --max_allowed_packet=32505856
+    environment:
+      - MYSQL_RANDOM_ROOT_PASSWORD=1
+      - MYSQL_USER=base_user
+      - MYSQL_PASSWORD=Jun4ZMJIamn2
+      - MYSQL_DATABASE=base
+    networks:
+      - base-network
+
+  base-redis:
+    image: redis:6.2.3-buster
+    container_name: base-redis
+    restart: on-failure
+    command: --port 6379
+    ports:
+      - "6379:6379"
+    networks:
+      - base-network
+
+networks:
+  base-network: 
+
+volumes:
+  db_data:

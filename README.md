@@ -75,4 +75,8 @@ bin/cake server -p 8765
 bin/cake migrations migrate
 ```
 
+## With docker
+```bash
+docker exec -it base-app bin/cake migrations migrate
+```
 
