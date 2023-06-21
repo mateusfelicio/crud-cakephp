@@ -50,7 +50,7 @@ return [
         'namespace' => 'App',
         'encoding' => env('APP_ENCODING', 'UTF-8'),
         'defaultLocale' => env('APP_DEFAULT_LOCALE', 'en_US'),
-        'defaultTimezone' => env('APP_DEFAULT_TIMEZONE', 'UTC'),
+        'defaultTimezone' => 'America/Sao_Paulo',
         'base' => false,
         'dir' => 'src',
         'webroot' => 'webroot',
@@ -296,7 +296,7 @@ return [
             'className' => Connection::class,
             'driver' => Mysql::class,
             'persistent' => false,
-            'timezone' => 'UTC',
+            'timezone' => 'America/Sao_Paulo',
 
             /*
              * For MariaDB/MySQL the internal default changed from utf8 to utf8mb4, aka full utf-8 support, in CakePHP 3.6
@@ -339,7 +339,7 @@ return [
             'className' => Connection::class,
             'driver' => Mysql::class,
             'persistent' => false,
-            'timezone' => 'UTC',
+            'timezone' => 'America/Sao_Paulo',
             //'encoding' => 'utf8mb4',
             'flags' => [],
             'cacheMetadata' => true,

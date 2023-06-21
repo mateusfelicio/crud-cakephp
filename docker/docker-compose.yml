@@ -10,8 +10,6 @@ services:
       - ./base-app/config/php/www.conf:/usr/local/etc/php-fpm.d/www.conf:ro
     networks:
       - base-network
-    # command:
-    #   composer install
 
   base-nginx:
     image: nginx:1.19.6
@@ -43,8 +41,9 @@ services:
       - db_data:/var/lib/mysql/
       - ../mysql/logs/mysql/:/var/log/mysql/
       - ../mysql/backups/:/var/backups/
-    ports:
-      - "3306:3306"
+      - ../dump-mysql:/docker-entrypoint-initdb.d
+    expose:
+      - "3306"
     command: --max_allowed_packet=32505856
     environment:
       - MYSQL_RANDOM_ROOT_PASSWORD=1

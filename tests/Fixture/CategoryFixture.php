@@ -26,11 +26,18 @@ class CategoryFixture extends TestFixture
         $this->records = [
             [
                 'id' => 1,
-                'name' => 'Lorem ipsum dolor sit amet',
+                'name' => 'Test 1',
                 'created' => '2023-06-20 05:05:53',
                 'modified' => '2023-06-20 05:05:53',
             ],
+            [
+                'id' => 2,
+                'name' => 'Test 2',
+                'created' => '2023-06-20 05:06:53',
+                'modified' => '2023-06-20 05:06:53',
+            ],
         ];
+
         parent::init();
     }
 }

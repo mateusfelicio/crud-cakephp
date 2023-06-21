@@ -94,11 +94,16 @@ class CategoryController extends AppController
     {
         $this->request->allowMethod(['post', 'delete']);
         $category = $this->Category->get($id);
-        if ($this->Category->delete($category)) {
-            $this->Flash->success(__('Categoria removida com sucesso'));
-        } else {
-            $this->Flash->error(__('Erro ao remover categoria'));
+        try {
+            if ($this->Category->delete($category)) {
+                $this->Flash->success(__('Categoria removida com sucesso'));
+            } else {
+                $this->Flash->error(__('Erro ao remover categoria'));
+            }
+        } catch (\Throwable $th) {
+            $this->Flash->error(__('Erro ao remover categoria. Possivelmente existe items relacionado com essa categoria'));
         }
+        
 
         return $this->redirect(['action' => 'index']);
     }
