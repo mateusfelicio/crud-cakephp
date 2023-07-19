@@ -1,5 +1,8 @@
 FROM php:8.1-fpm-buster
 
+RUN pecl install xdebug
+RUN docker-php-ext-enable xdebug
+
 #  * a PHP accelerator should be installed
 #    > Install and/or enable a PHP accelerator (highly recommended).
 

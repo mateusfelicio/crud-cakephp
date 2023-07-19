@@ -34,6 +34,9 @@ docker composer up
 
 - In another cmd execute the migrations
 ```bash
+docker exec -it base-app composer install
+```
+```bash
 docker exec -it base-app bin/cake migrations migrate
 ```
 ```bash
