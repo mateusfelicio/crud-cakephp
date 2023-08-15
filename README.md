@@ -49,3 +49,21 @@ docker exec -it base-app vendor/bin/phpunit
 ```
 
 - Access the project in localhost [CRUDstore](http://localhost:8084)
+
+- VSCODE launch.json Example
+  ```JSON
+  {
+        "version": "0.2.0",
+        "configurations": [
+            {
+                "name": "Listen for XDebug on Docker",
+                "type": "php",
+                "request": "launch",
+                "port": 9003,
+                "pathMappings": {
+                    "/var/www/html/": "${workspaceFolder}"
+                }
+            }
+        ]
+    }
+  ```
