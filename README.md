@@ -67,3 +67,21 @@ docker exec -it base-app vendor/bin/phpunit
         ]
     }
   ```
+- Another launch.json Example used in other project
+```JSON
+  {
+        "version": "0.2.0",
+        "configurations": [
+            {
+                "name": "Listen for XDebug on Docker",
+                "type": "php",
+                "request": "launch",
+                "port": 9003,
+                "pathMappings": {
+                    "/var/www/backend/": "${workspaceFolder}"
+                }
+            }
+        ]
+    }
+  ```
+The pathMapping configuration was adjusted because the project is located in a different path within the Docker container
